@@ -13,7 +13,7 @@
 \---------------------------------------/
 */
 
-class Iluminacao(){
+class Iluminacao{
 
 	constructor(luz,amb,corAmb,constDif,vetDif,espec,fonteLuz,rug){
 		this.posicaoLuz = luz;

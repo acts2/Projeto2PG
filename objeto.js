@@ -10,7 +10,7 @@ objeto.byu                                ; pontos do objeto (em coordenadas de 
 \---------------------------------------/
 */
 
-class Objeto(){
+class Objeto{
 
 	constructor(numP,numT,p1,p2,p3,tri){
 		this.numPontos = numP;

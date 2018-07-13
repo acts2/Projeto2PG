@@ -6,6 +6,32 @@ class Vetor{
 		this.z = z;
 	}
 
+	norma(){
+		let norm = Math.pow(this.x,2) + Math.pow(this.y,2) + Math.pow(this.z,2);
+	    return Math.sqrt(norm);
+
+	}
+
+	multPorEsc(esc){
+		let a = this.x * esc;
+	    let b = this.y * esc;
+		let c = this.z * esc;
+
+		return new Vetor(a,b,c);	
+
+	}
+
+	normaliza(){
+		let norm = this.norma();
+	    norm = 1/ norm;
+	    let a = this.x * norm;
+	    let b = this.y * norm;
+	    let c = this.z * norm;
+
+	    return new Vetor(a,b,c);
+
+	}
+
 }
 
 function produtoEscalar(vetorA,vetorB){
@@ -18,18 +44,8 @@ function produtoVetorial(vetA,vetB){
 	let b = (vetA.z * vetB.x) - (vetA.x * vetB.z);
 	let c = (vetA.x * vetB.y) - (vetA.y * vetB.x);
 
-	var uxv = new Vetor(a,b,c);
-	return uxv;
-}
-
-function multPorEsc(vetor,esc){
-	let a = vetor.x * esc;
-	let b = vetor.y * esc;
-	let c = vetor.z * esc;
-
-	var mult = new Vetor(a,b,c);
-
-	return mult;
+	return new Vetor(a,b,c);
+	
 }
 
 
@@ -37,26 +53,19 @@ function projVetores(vetorU,vetorV){ //projeção do vetor u na direção de v
 
 	let esc = (produtoEscalar(vetorU,vetorV)/produtoEscalar(vetorU,vetorU));	
 
-	var proj = multPorEsc(vetorV,esc);
-
-	return proj;
+	return  vetorV.multPorEsc(esc);	
 
 }
 
-function norma(vetor){
-	norm = Math.pow(vetor.x,2) + Math.pow(vetor.y,2) + Math.pow(vetor.z,2);
-	return Math.sqrt(norm);
-}
 
 
-/* testes
+// testes
 var vetA = new Vetor(1,-2,2);
 var vetB = new Vetor(-3,6,2);
 var vet = produtoVetorial(vetA,vetB);
-var norm = norma(vetA);
+//var norm = norma(vetA);
 var proj = projVetores(vetA,vetB);
-console.log(vet);
-console.log(norm);
-console.log(proj);
+//console.log(vet);
+//console.log(vetA.norma());
+//console.log(vetA.normaliza());
 
-*/
