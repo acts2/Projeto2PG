@@ -10,13 +10,13 @@ camera.cfg
 */
 class Camera{
 
-	constructor(posicao,N,V,dist,hx,hy){
-		this.posicao = posicao; //C
-	    this.vetorN = N;
-	    this.vetorV = V;
-	    this.distancia = dist;
-	    this.hx = hx;
-	    this.hy = hy;
+	constructor(atr){
+		this.posicao = atr.pos; //C
+	    this.vetorN = atr.N;
+	    this.vetorV = atr.V;
+	    this.distancia = atr.dist;
+	    this.hx = atr.hx;
+	    this.hy = atr.hy;
 	    this.vetorU = null;
 	}
 

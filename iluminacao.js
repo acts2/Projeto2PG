@@ -15,15 +15,15 @@
 
 class Iluminacao{
 
-	constructor(luz,amb,corAmb,constDif,vetDif,espec,fonteLuz,rug){
-		this.posicaoLuz = luz;
-	    this.ambiente= amb;
-		this.corAmbiente = corAmb;
-		this.constDif = constDif;
-		this.vetDif = vetDif;
-		this.especular = espec;
-		this.fonteLuz = fonteLuz;
-		this.rugosidade = rug;
+	constructor(atr){
+		this.posicaoLuz = atr.pos;
+	    this.ambiente= atr.amb;
+		this.corAmbiente = atr.corAmb;
+		this.constDif = atr.diff;
+		this.vetDif = atr.vetDif;
+		this.especular = atr.espec;
+		this.cor = atr.cor;
+		this.rugosidade = atr.rug;
 	}
 
 	
