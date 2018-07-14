@@ -12,15 +12,13 @@ objeto.byu                                ; pontos do objeto (em coordenadas de 
 
 class Objeto{
 
-	constructor(numP,numT,p1,p2,p3,tri){
-		this.numPontos = numP;
-		this.numTri = numT;
-		this.p1 = p1;
-		this.p2 = p2;
-		this.p3 = p3;
-		this.tri = tri;
+	constructor(atr){
+		this.qtdP = atr.qtd[0];
+		this.qtdTri = atr.qtd[1];
+		this.vertices = atr.vertices;
+		this.triangulo = atr.triangles;
 	}
+
 	
-
-
 }
+

@@ -18,6 +18,8 @@ class Camera{
 	    this.hx = atr.hx;
 	    this.hy = atr.hy;
 	    this.vetorU = null;
+	    this.normalizedN = null;
+	    this.normalizedV = null; // e ortogonalizado
 	}
 
 	ortogonaliza(){ //Gram-Schimidt
@@ -36,39 +38,56 @@ class Camera{
 	calculaVetorV(){//normalizado e ortogonalizado
 
 		var vlinha = this.ortogonaliza();		
-		this.vetorV = vlinha.normaliza();
+		this.normalizedV = vlinha.normaliza();
 		
-		return this.vetorV;
+		return this.normalizedV;
 
 	}
 
 	calculaVetorN(){//normalizado
-		this.vetorN = this.vetorN.normaliza();
-		return this.vetorN;
+		this.normalizedN = this.vetorN.normaliza();
+		return this.normalizedN;
 
 	}
 	calculaVetorU(){
 
-		this.vetorU = produtoVetorial(this.vetorN,this.vetorV);
+		this.vetorU = produtoVetorial(this.normalizedN,this.normalizedV);
 
 		return this.vetorU;
 	}
 
+	getMatriz(){
+		var matrix = new Array(3);
+		matrix[0] = this.vetorU;
+		matrix[1] = this.normalizedV;
+		matrix[2] = this.normalizedN;
+
+		return matrix;
+	}
 
 }
 
+/*
 var pos = new Vetor(-200,-50,300);
-var n = new Vetor(0.667,0.172,-1);
-var v = new Vetor(0,3,0);
+var N = new Vetor(0.667,0.172,-1);
+var V = new Vetor(0,3,0);
 
+var cam = {};
+cam['pos'] = pos;
+cam['N'] = N;
+cam['V'] = V;
+cam['dist'] = 65;
+cam['hx'] = 0.5;
+cam['hy'] = 0.6;
 
-var cam = new Camera(pos,n,v,65,0.5,0.6);
-//console.log(cam.posicao);
+var ca = new Camera(cam);
+//console.log(ca.posicao);
 //console.log(produtoVetorial(v,n));
 //console.log(cam.calculaVetorU());
-//console.log(cam.calculaVetorN());
-//console.log(cam.calculaVetorV());
-//console.log(cam.calculaVetorU());
+//console.log(ca.calculaVetorN());
+//console.log(ca.calculaVetorV());
+//console.log(ca.calculaVetorU());
+//console.log(ca.getMatriz());*/
 
 
 

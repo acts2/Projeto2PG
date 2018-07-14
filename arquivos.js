@@ -1,4 +1,5 @@
-function init(){
+
+function init(){  //por enquanto só funciona no edge
 
 	loadFiles()
 		.then(function(data){
@@ -6,10 +7,12 @@ function init(){
 			var lightFileContent = data[1];
 			//console.log(lightFileContent);
 			var objectFileContent = data[2];
+			//console.log(objectFileContent);
 
 			var camera = loadCamera(cameraFileContent);
 			var light = loadIluminacao(lightFileContent);
-			var object = loadObjeto(objectFileContent);		
+			var object = loadObjeto(objectFileContent);	
+			//console.log(object);	
 
 
 		});
@@ -40,7 +43,7 @@ var requestFile = function(filename,alias,attributes,callback) {
 		request.onreadystatechange = function() {
 			if (request.readyState == 4) {
 				if(request.status == 404) {
-					console.info(filename + ' does not exist');
+					console.info(filename + ' não existe');
 					reject();
 				}
 				else {
@@ -132,6 +135,91 @@ function loadIluminacao(fileContent){
 }
 
 function loadObjeto(fileContent){
+		var objectFileLines = fileContent.split('\n').slice(0,-1);
+		//console.log(objectFileLines[0]);
+		var object = {};
+		var lineAttr = [
+			'qtd',
+			'vertices',
+			'triangles',
+		];
+
+		var i = 0;
+
+		var line = objectFileLines[i];
+		var lineValues = line.split(' ');
+		if(lineAttr[i] == 'qtd' && lineValues.length === 2) {
+			
+			var verticesQtd = parseInt(lineValues[0]);
+			var trianglesQtd = parseInt(lineValues[1]);
+			object[lineAttr[i]] = [];
+			object[lineAttr[i]].push(verticesQtd);
+			object[lineAttr[i]].push(trianglesQtd);
+
+			
+			var vS = i+1;
+			var vF = i+verticesQtd;
+
+			object.vertices = [];
+
+			while (vS <= vF && objectFileLines[vS] !== undefined) {
+				var verticeLine = objectFileLines[vS];
+				var vertice = verticeLine.split(' ').slice(1);
+				//console.log(vertice);
+
+				if(vertice.length === 3) {
+					object.vertices.push(parseFloat(vertice[0]));
+					object.vertices.push(parseFloat(vertice[1]));
+					object.vertices.push(parseFloat(vertice[2]));
+
+					vS++;
+				} else {
+					vS++;
+					vF++;
+				}
+			}
+
+			object.vertices = new Float32Array(object.vertices);
+
+			if (object.vertices.length !== 3*verticesQtd) {
+				return;
+			}
+
+			//console.log(object.vertices[10]);
+
+			
+			var tS = vS;
+			var tF = vS+trianglesQtd-1;
+
+			object.triangles = [];
+
+			while (tS <= tF && objectFileLines[tS] !== undefined) {
+				var triangleLine = objectFileLines[tS];
+				var triangle = triangleLine.split(' ').slice(0,-1);				
+
+				if(triangle.length === 3) {
+					object.triangles.push(parseInt(triangle[0]));
+					object.triangles.push(parseInt(triangle[1]));
+					object.triangles.push(parseInt(triangle[2]));
+					tS++;
+				} else {
+					tS++;
+					tF++;
+				}
+			}
+
+			object.triangles = new Float32Array(object.triangles);
+
+			if (object.triangles.length !== 3*trianglesQtd) {
+				return;
+			}
+		}
+
+		//console.log(object.triangles[0]);
+
+		var obj = new Objeto(object);
+		console.log(obj.triangulo[4]);
+		return obj;
 
 }
 

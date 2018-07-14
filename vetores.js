@@ -48,13 +48,25 @@ function produtoVetorial(vetA,vetB){
 	
 }
 
-
 function projVetores(vetorU,vetorV){ //projeção do vetor u na direção de v
 
 	let esc = (produtoEscalar(vetorU,vetorV)/produtoEscalar(vetorU,vetorU));	
 
 	return  vetorV.multPorEsc(esc);	
 
+}
+
+function matrix(vet1,vet2,vet3){
+	var mat =  new array();
+	mat[0] = vet1;
+	mat[1] = vet2;
+	mat[2] = vet3;
+	return mat;
+}
+
+function subtrai(v1,v2){
+	var sub = new Vetor((v2.x-v1.x),(v2.y-v1.y),(v2.z-v1.z));
+	return sub;
 }
 
 
@@ -65,6 +77,7 @@ var vetB = new Vetor(-3,6,2);
 var vet = produtoVetorial(vetA,vetB);
 //var norm = norma(vetA);
 var proj = projVetores(vetA,vetB);
+//console.log(subtrai(vetA,vetB));
 //console.log(vet);
 //console.log(vetA.norma());
 //console.log(vetA.normaliza());
