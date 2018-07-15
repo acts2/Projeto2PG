@@ -168,9 +168,14 @@ function loadObjeto(fileContent){
 				//console.log(vertice);
 
 				if(vertice.length === 3) {
-					object.vertices.push(parseFloat(vertice[0]));
-					object.vertices.push(parseFloat(vertice[1]));
-					object.vertices.push(parseFloat(vertice[2]));
+					var v = new Vetor(
+							(parseFloat(vertice[0])),
+							(parseFloat(vertice[1])),
+							(parseFloat(vertice[2]))
+						);
+					//console.log(v);
+					object.vertices.push(v);
+					//console.log(object.vertices);
 
 					vS++;
 				} else {
@@ -179,28 +184,32 @@ function loadObjeto(fileContent){
 				}
 			}
 
-			object.vertices = new Float32Array(object.vertices);
-
-			if (object.vertices.length !== 3*verticesQtd) {
+			//console.log(object.vertices[0]);			
+			
+			if (object.vertices.length !== verticesQtd) {
 				return;
 			}
 
-			//console.log(object.vertices[10]);
+			
 
 			
-			var tS = vS;
+			var tS = vS;			
 			var tF = vS+trianglesQtd-1;
 
 			object.triangles = [];
 
 			while (tS <= tF && objectFileLines[tS] !== undefined) {
 				var triangleLine = objectFileLines[tS];
-				var triangle = triangleLine.split(' ').slice(0,-1);				
+				var triangle = triangleLine.split(' ').slice(0,-1);	
+				//console.log(triangle);			
 
 				if(triangle.length === 3) {
-					object.triangles.push(parseInt(triangle[0]));
-					object.triangles.push(parseInt(triangle[1]));
-					object.triangles.push(parseInt(triangle[2]));
+					var t = new Vetor(
+							(parseInt(triangle[0])),
+							(parseInt(triangle[1])),
+							(parseInt(triangle[2]))
+						);
+					object.triangles.push(t);
 					tS++;
 				} else {
 					tS++;
@@ -208,9 +217,9 @@ function loadObjeto(fileContent){
 				}
 			}
 
-			object.triangles = new Float32Array(object.triangles);
+			
 
-			if (object.triangles.length !== 3*trianglesQtd) {
+			if (object.triangles.length !== trianglesQtd) {
 				return;
 			}
 		}
@@ -218,12 +227,12 @@ function loadObjeto(fileContent){
 		//console.log(object.triangles[0]);
 
 		var obj = new Objeto(object);
-		console.log(obj.triangulo[4]);
+		//console.log(obj.triangulos[4].x);
 		return obj;
 
 }
 
-init();
+//init();
 
 
 

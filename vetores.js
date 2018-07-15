@@ -69,16 +69,44 @@ function subtrai(v1,v2){
 	return sub;
 }
 
+function adiciona(v1,v2){
+	var add = new Vetor((v1.x+v2.x),(v1.y+v2.y),(v1.z+v2.z));
+	return add;
+}
+
+function multMatriz3x1(mat1,mat2){
+	var mult = new Array(mat1.length);
+	if(mat2.length>3){
+		return;
+	}else{
+		mult[0] = (mat1[0].x * mat2[0].x) + (mat1[0].y * mat2[0].y) + (mat1[0].z * mat2[0].z );
+		mult[1] = (mat1[1].x * mat2[0].x) + (mat1[1].y * mat2[0].y) + (mat1[1].z * mat2[0].z );
+		mult[2] = (mat1[2].x * mat2[0].x) + (mat1[2].y * mat2[0].y) + (mat1[2].z * mat2[0].z );
+
+	}
+
+	return mult;
+}
+
 
 
 // testes
 var vetA = new Vetor(1,-2,2);
 var vetB = new Vetor(-3,6,2);
+var vetC = new Vetor (1,1,1);
 var vet = produtoVetorial(vetA,vetB);
 //var norm = norma(vetA);
 var proj = projVetores(vetA,vetB);
-//console.log(subtrai(vetA,vetB));
+//vetA = adiciona(vetA,vetB);
+//console.log(vetA);
+//console.log(adiciona(vetA,vetB));
 //console.log(vet);
 //console.log(vetA.norma());
 //console.log(vetA.normaliza());
+
+
+
+
+
+
 
