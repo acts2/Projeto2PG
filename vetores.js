@@ -74,17 +74,18 @@ function adiciona(v1,v2){
 	return add;
 }
 
-function multMatriz3x1(mat1,mat2){
+function multMatriz3x1(mat1,mat2){ //multiplicacao de matriz 3x3 e 3x1
 	var mult = new Array(mat1.length);
 	if(mat2.length>3){
 		return;
 	}else{
-		mult[0] = (mat1[0].x * mat2[0].x) + (mat1[0].y * mat2[0].y) + (mat1[0].z * mat2[0].z );
-		mult[1] = (mat1[1].x * mat2[0].x) + (mat1[1].y * mat2[0].y) + (mat1[1].z * mat2[0].z );
-		mult[2] = (mat1[2].x * mat2[0].x) + (mat1[2].y * mat2[0].y) + (mat1[2].z * mat2[0].z );
+		mult[0] = produtoEscalar(mat1[0],mat2);
+		mult[1] = produtoEscalar(mat1[1],mat2);
+		mult[2] = produtoEscalar(mat1[2],mat2);
 
 	}
 
+	var mult = new Vetor(mult[0],mult[1],mult[2]);
 	return mult;
 }
 
@@ -103,6 +104,12 @@ var proj = projVetores(vetA,vetB);
 //console.log(vet);
 //console.log(vetA.norma());
 //console.log(vetA.normaliza());
+
+var vetD = new Vetor(1,2,2);
+var m2 = [vetD];
+var m1 = [vetA,vetB,vetC];
+
+console.log(multMatriz3x1(m1,vetD));
 
 
 
