@@ -19,6 +19,44 @@ class Objeto{
 		this.triangulos = atr.triangles;
 		this.triNormais = new Array(this.qtdTri);
 		this.verticesNormais = [];
+		this.pontos2d = new Array(this.qtdP);
+	}
+
+	coordView(camera){
+		/*
+		Para cada ponto do objeto, projete-o para coordenadas de vista, podendo já descartar os pontos em coordenadas de mundo:
+		P_objeto_vista = [I]e,alfa * (P_objeto_mundo - C)
+		*/
+		var matriz = camera.getMatriz();
+		for(var i=0;i<this.qtdP;i++){
+			pMinusC = subtrai(camera.posicao,this.vertices[i]);
+			this.vertices[i] = multMatriz3x1(matriz,pMinusC); //descarta o ponto original
+
+			this.verticesNormais[i] = new Vetor(0,0,0); //inicializa as normais dos vertices com zero
+		}
+	}
+
+	coor2D(camera){
+		/*
+		Para cada ponto do objeto, projete-o para coordenadas de tela 2D, sem descartar os pontos em coordenadas de vista 3D:
+		// a linha abaixo gera os pontos 2D parametrizados no intervalo [-1, 1]:
+		P_objeto_tela = ((d/hx)*(P_objeto_vista.x/P_objeto_vista.z), (d/hy)*(P_objeto_vista.y/P_objeto_vista.z))
+		// em seguida parametrizamos os pontos para as dimensões da janela (intervalos [0, width] e [0, height]) ,
+		// transformando tudo em inteiro, podendo descartar os pontos gerados no intervalo [-1, 1].
+		P_objeto_tela.x = (int)((P_objeto_tela.x + 1) * width / 2)  width == hx
+		P_objeto_tela.y = (int)((1 - P_objeto_tela.y) * height / 2) height == hy
+		*/
+
+		for(var i=0;i<this.qtdP;i++){
+			this.pontos2d[i] = new Vetor(0,0,0);
+			this.pontos2d[i].x = (camera.distancia/camera.hx) * (this.vertices[i].x/this.vertices[i].z);
+			this.pontos2d[i].y = (camera.distancia/camera.hy) * (this.vertices[i].y/this.vertices[i].z);
+
+			this.pontos2d[i].x = Math.round((this.pontos2d[i].x +1)*(camera.hx/2));
+			this.pontos2d[i].y = Math.round((1-this.pontos2d[i].y)*(camera.hy/2));
+
+		}
+
 	}
 
 	normalTriangulos(){
@@ -44,6 +82,11 @@ class Objeto{
 			//console.log(v2v3); ok
 			this.triNormais[i] = produtoVetorial(v1v2,v2v3); //calcula a normal
 			this.triNormais[i] = this.triNormais[i].normaliza();//depois normaliza
+
+			//somar ela a normal de cada um dos 3 pontos 
+			this.verticesNormais[vix] = adiciona(this.verticesNormais[vix],this.triNormais[i]);//normal do vertice que esta em vix
+			this.verticesNormais[viy] = adiciona(this.verticesNormais[viy],this.triNormais[i]);
+			this.verticesNormais[viz] = adiciona(this.verticesNormais[viz],this.triNormais[i]);
 		}		
 
 	}
@@ -61,9 +104,9 @@ class Objeto{
 			
 			for(var i=0;i<this.qtdTri;i++){				
 				
-				//console.log(normalVertice,j);
+				
 				if((this.triangulos[i].x == j+1) || (this.triangulos[i].y ==j+1) || (this.triangulos[i].z == j+1)){
-					//console.log(this.triangulos[i].x,this.triangulos[i].y,k);
+					
 					normalVertice = adiciona(normalVertice,this.triNormais[i]);
 					qtd++;	
 					
@@ -71,8 +114,9 @@ class Objeto{
 			}	
 		
 			var aux = normalVertice.multPorEsc(1/qtd);
-			//console.log(qtd);
-			this.verticesNormais.push(aux);
+
+			//pq as normais dos vertices ja foram inicializadas no cálculo das normais dos triângulos
+			this.verticesNormais[j] = adiciona(this.verticesNormais[j],aux);
 
 		}
 
