@@ -2,16 +2,72 @@
 <html lang="pt">
 <head>
 	<meta charset = "UTF-8">
+
+	<script src = "vetores.js"></script>
+	<script src = "camera.js"></script>
+	<script src = "iluminacao.js"></script>
+	<script src = "objeto.js"></script>
+	<script src = "arquivos.js"></script>
 </head>
 <body>
 
-<p id="demo"></p>
 
-<script src = "vetores.js"></script>
-<script src = "camera.js"></script>
-<script src = "iluminacao.js"></script>
-<script src = "objeto.js"></script>
-<script src = "arquivos.js"></script>
+
+	<div id='contents' class="container">
+		<h1>
+			
+		</h1>
+
+		<form class="pane fs-form" name="fs-form" action="">
+			<h3>Escolha um objeto</h3>
+			
+			<div class="form-item">
+				
+				<select name="object" id="object-file">
+					<option value="crusader" selected>Crusader</option>
+					<option value="vaso">Vaso</option>
+					<option value="calice2">Calice</option>
+					<option value="camaro">Camaro</option>
+					<option value="cat">Cat</option>
+					<option value="spaceship">Spaceship</option>
+					<option value="cow">Cow</option>
+					<option value="yoda">Yoda</option>
+				</select>
+
+			</div>
+			<div class="form-item">
+				<span class="readButton">
+					<button type="button">
+						Start
+					</button>
+				</span>
+			</div>
+			<div class="form-item">
+				<span class="camera-error error"></span>
+				<span class="light-error error"></span>
+				<span class="object-error error"></span>
+			</div>
+		</form>
+		<div class="pane fs-canvas">		
+
+			<canvas id="canvas" width="665" height="480"></canvas>
+		</div>
+
+	</div>
+
+	<script >
+
+		document.querySelector('.readButton').addEventListener('click', function(e) {
+
+				if (e.target.tagName.toLowerCase() == 'button') {					
+					init();
+				}
+			});
+		
+
+	</script>
+
+
 
 </body>
 </html>

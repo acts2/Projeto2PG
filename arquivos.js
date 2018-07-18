@@ -12,7 +12,7 @@ function init(){  //por enquanto só funciona no edge
 			var camera = loadCamera(cameraFileContent);
 			var light = loadIluminacao(lightFileContent);
 			var object = loadObjeto(objectFileContent);	
-			//console.log(object);	
+			console.log(camera);	
 
 
 		});
@@ -22,9 +22,11 @@ function init(){  //por enquanto só funciona no edge
 
 
 function loadFiles(){
-	var cameraFileName = '../inputs/Cameras/01_Camera.cfg';
-	var lightFileName = '../inputs/iluminacao.txt';
-	var objectFileName = '../inputs/objeto.byu';
+
+	var objectName = document.getElementById('object-file').value;
+	var cameraFileName = 'inputs/Cameras/'+ objectName +'.cfg';
+	var lightFileName = 'inputs/iluminacao.txt';
+	var objectFileName = 'inputs/Objetos/'+ objectName +'.byu';
 
 	return Promise.all([
 		requestFile(cameraFileName),
@@ -76,9 +78,9 @@ function loadCamera(fileContent){
 		var lineValues = line.split(' ');
 		if(lineAttr[i] && lineValues.length === 3) {
 			camera[lineAttr[i]] = new Vetor(
-				lineValues[0],
-				lineValues[1],
-				lineValues[2]
+				parseFloat(lineValues[0]),
+				parseFloat(lineValues[1]),
+				parseFloat(lineValues[2])
 				);
 		}
 	}		
@@ -116,12 +118,12 @@ function loadIluminacao(fileContent){
 
 			if(lineAtr[i]) {
 				if (lineValues.length == 1) {
-					light[lineAtr[i]] = lineValues[0];
+					light[lineAtr[i]] = parseInt(lineValues[0]);
 				} else {
 					light[lineAtr[i]] = new Vetor(
-						lineValues[0],
-						lineValues[1],
-						lineValues[2]
+						parseFloat(lineValues[0]),
+						parseFloat(lineValues[1]),
+						parseFloat(lineValues[2])
 					);
 				}
 			}
