@@ -4,8 +4,7 @@ class Renderiza{
 		this.camera = camera;
 		this.objeto = objeto;
 		this.iluminacao = light;
-		this.zBuffer = new Array();
-		this.tela = new Array();
+		this.zBuffer = new Array();		
 		this.Height = 480;
 		this.Width = Math.round(this.Height * (camera.hx/camera.hy));
 		this.contexto = this.context();
@@ -25,10 +24,10 @@ class Renderiza{
 	*/
 		for(var i=0;i<this.Width;i++){
 			this.zBuffer[i] = new Array();
-			this.tela[i] = new Array();
+			
 			for(var j=0;j<this.Height;j++){
 				this.zBuffer[i][j] = Infinity;
-				this.tela[i][j] = new Vetor(255,255,255);
+				
 			}
 		}
 
@@ -93,13 +92,12 @@ class Renderiza{
 
 						
 						var cor = this.calculaCor(pLinha, pontoNormal);
-						//console.log("sera que eu cheguei aqui");
-					
-						this.tela[x][y] = cor;
+						//console.log("sera que eu cheguei aqui");					
+						
 						colorePonto(x,y,cor,this.contexto);
 
 
-						//console.log(this.tela[x][y],x,y);
+						
 							
 					}
 				}
@@ -152,7 +150,7 @@ class Renderiza{
 		
 
 		//checa se <N.V> < 0
-		pontoNormal = checkN(pontoNormal,vetorV);
+		pontoNormal = verificaN(pontoNormal,vetorV);
 		
 
 		var dotNL = produtoEscalar(vetorL,pontoNormal);
@@ -185,9 +183,9 @@ class Renderiza{
 		}
 		//console.log('cor',cor);
 
-		cor.x = Math.round(checkCor(cor.x));
-		cor.y = Math.round(checkCor(cor.y));
-		cor.z = Math.round(checkCor(cor.z));
+		cor.x = Math.round(verificaCor(cor.x));
+		cor.y = Math.round(verificaCor(cor.y));
+		cor.z = Math.round(verificaCor(cor.z));
 		return cor;
 
 	}
@@ -197,11 +195,8 @@ class Renderiza{
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
 		ctx.width = this.Width;
-		ctx.height = this.Height;
+		ctx.height = this.Height;	
 		
-		//ctx.strokeStyle = "black";
-		//ctx.fillRect(0,0,660,480);	
-		//ctx.fillStyle = "blue";
 		return ctx;
 	
 
@@ -244,7 +239,7 @@ function componenteEspecular(dotRV,iluminacao){
 	return especular;
 }
 
-function checkCor(cor){
+function verificaCor(cor){
 	
 	if(cor <= 0){
 		cor = 0;
@@ -256,7 +251,7 @@ function checkCor(cor){
 
 
 
-function checkN(vetorNormal, vetorV){
+function verificaN(vetorNormal, vetorV){
 	//inverte N se <V.N> < 0
 	var dotnv = produtoEscalar(vetorNormal,vetorV);
 	if(dotnv < 0){

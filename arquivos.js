@@ -20,33 +20,25 @@ function init(){  //por enquanto só funciona no edge
 			camera.calculaVetorV();
 			camera.calculaVetorU();	
 
+			console.log(camera);
+
 			light.toViewCoord(camera);
-			//console.log(light);
+			///console.log(light);
 
 			object.views(camera);
 			//console.log(object);
 			object.coord2d(camera);
 			
 			object.normalTriangulos();
-			//console.log(object);
+			console.log(object);
 
 			var rd = new Renderiza(camera,object,light);
 			rd.inicializaZBuffer();
-			console.log(rd);
-
-			
-			
+			console.log(rd);	
 			
 
-			//console.log(rd.objeto.pontos2d);
-			//console.log(rd);
-			rd.render();
-			//console.log("haha");
-			//rd.colore();
 			
-			//console.log(rd.zBuffer);
-			
-			
+			rd.render();	
 
 
 
@@ -173,7 +165,7 @@ function loadIluminacao(fileContent){
 
 function loadObjeto(fileContent){
 		var objectFileLines = fileContent.split('\n').slice(0,-1);
-		//console.log(objectFileLines[0]);
+		//console.log(objectFileLines);
 		var object = {};
 		var lineAttr = [
 			'qtd',
@@ -201,8 +193,10 @@ function loadObjeto(fileContent){
 
 			while (vS <= vF && objectFileLines[vS] !== undefined) {
 				var verticeLine = objectFileLines[vS];
-				var vertice = verticeLine.split(' ').slice(1);
-				//console.log(vertice);
+				var vertice = verticeLine.split(' ');
+				if(vertice[0] == ""){
+					vertice = vertice.slice(1);
+				}
 
 				if(vertice.length === 3) {
 					var v = new Vetor(
@@ -221,7 +215,7 @@ function loadObjeto(fileContent){
 				}
 			}
 
-			//console.log(object.vertices[0]);			
+			console.log(object.vertices[0]);			
 			
 			if (object.vertices.length !== verticesQtd) {
 				return;
@@ -237,8 +231,10 @@ function loadObjeto(fileContent){
 
 			while (tS <= tF && objectFileLines[tS] !== undefined) {
 				var triangleLine = objectFileLines[tS];
-				var triangle = triangleLine.split(' ').slice(0,-1);	
-				//console.log(triangle);			
+				var triangle = triangleLine.split(' ');	
+				if(triangle.length > 3){
+					triangle = triangle.slice(0,-1);
+				}			
 
 				if(triangle.length === 3) {
 					var t = new Vetor(
@@ -261,7 +257,7 @@ function loadObjeto(fileContent){
 			}
 		}
 
-		//console.log(object.triangles[0]);
+		console.log(object.triangles[0]);
 
 		var obj = new Objeto(object);
 		//console.log(obj.triangulos[4].x);
