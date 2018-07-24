@@ -10,9 +10,44 @@ function init(){  //por enquanto só funciona no edge
 			//console.log(objectFileContent);
 
 			var camera = loadCamera(cameraFileContent);
+			//console.log(camera);
 			var light = loadIluminacao(lightFileContent);
 			var object = loadObjeto(objectFileContent);	
-			console.log(camera);	
+			//console.log(object);
+			
+			camera.calculaVetorN();
+
+			camera.calculaVetorV();
+			camera.calculaVetorU();	
+
+			light.toViewCoord(camera);
+			//console.log(light);
+
+			object.views(camera);
+			//console.log(object);
+			object.coord2d(camera);
+			
+			object.normalTriangulos();
+			//console.log(object);
+
+			var rd = new Renderiza(camera,object,light);
+			rd.inicializaZBuffer();
+			console.log(rd);
+
+			
+			
+			
+
+			//console.log(rd.objeto.pontos2d);
+			//console.log(rd);
+			rd.render();
+			//console.log("haha");
+			//rd.colore();
+			
+			//console.log(rd.zBuffer);
+			
+			
+
 
 
 		});
@@ -104,10 +139,10 @@ function loadIluminacao(fileContent){
 		var lineAtr = [
 			'pos',
 			'amb',
-			'ambColor',
+			'corAmb',
 			'diff',
 			'vetDif',
-			'spec',
+			'espec',
 			'cor',
 			'rug',
 		];

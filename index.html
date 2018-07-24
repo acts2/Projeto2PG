@@ -4,10 +4,14 @@
 	<meta charset = "UTF-8">
 
 	<script src = "vetores.js"></script>
+	<script src = "triangulo.js"></script>
 	<script src = "camera.js"></script>
 	<script src = "iluminacao.js"></script>
 	<script src = "objeto.js"></script>
+	<script src = "renderiza.js"></script>
 	<script src = "arquivos.js"></script>
+	
+	
 </head>
 <body>
 
@@ -48,6 +52,10 @@
 				<span class="object-error error"></span>
 			</div>
 		</form>
+		<div>
+			<p></p>
+		</div>
+
 		<div class="pane fs-canvas">		
 
 			<canvas id="canvas" width="665" height="480"></canvas>
@@ -57,10 +65,16 @@
 
 	<script >
 
+		
+		
+
+
 		document.querySelector('.readButton').addEventListener('click', function(e) {
 
 				if (e.target.tagName.toLowerCase() == 'button') {					
 					init();
+					
+					//render();
 				}
 			});
 		

@@ -69,6 +69,14 @@ function subtrai(v1,v2){
 	return sub;
 }
 
+function inverte(vetor){
+	vetor.x = -(vetor.x);
+	vetor.y = -(vetor.y);
+	vetor.z = -(vetor.z);
+
+	return vetor;
+}
+
 function adiciona(v1,v2){
 	var add = new Vetor((v1.x+v2.x),(v1.y+v2.y),(v1.z+v2.z));
 	return add;
@@ -95,9 +103,12 @@ function multMatriz3x1(mat1,mat2){ //multiplicacao de matriz 3x3 e 3x1
 var vetA = new Vetor(1,-2,2);
 var vetB = new Vetor(-3,6,2);
 var vetC = new Vetor (1,1,1);
-var vet = produtoVetorial(vetA,vetB);
+
+vetA = adiciona(vetA,vetB);
+console.log(vetA);
+//var vet = produtoVetorial(vetA,vetB);
 //var norm = norma(vetA);
-var proj = projVetores(vetA,vetB);
+//var proj = projVetores(vetA,vetB);
 //vetA = adiciona(vetA,vetB);
 //console.log(vetA);
 //console.log(adiciona(vetA,vetB));
@@ -105,7 +116,7 @@ var proj = projVetores(vetA,vetB);
 //console.log(vetA.norma());
 //console.log(vetA.normaliza());
 
-var vetD = new Vetor(1,2,2);
+/*var vetD = new Vetor(1,2,2);
 var m2 = [vetD];
 var m1 = [vetA,vetB,vetC];
 

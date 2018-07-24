@@ -16,13 +16,13 @@
 class Iluminacao{
 
 	constructor(atr){
-		this.posicaoLuz = atr.pos; //P1
-	    this.ambiente= atr.amb;
+		this.posicaoLuz = atr.pos; //P1 - posição da fonte de luz
+	    this.coefAmb= atr.amb;
 		this.corAmbiente = atr.corAmb;
 		this.constDif = atr.diff;
 		this.vetDif = atr.vetDif;
 		this.especular = atr.espec;
-		this.cor = atr.cor;
+		this.Il = atr.cor;
 		this.rugosidade = atr.rug;
 	}
 
