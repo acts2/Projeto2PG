@@ -1,5 +1,5 @@
 
-function init(){  //por enquanto só funciona no edge
+function init(rugosity){  //por enquanto só funciona no edge
 
 	loadFiles()
 		.then(function(data){
@@ -13,17 +13,20 @@ function init(){  //por enquanto só funciona no edge
 			//console.log(camera);
 			var light = loadIluminacao(lightFileContent);
 			var object = loadObjeto(objectFileContent);	
+
+			light.rugosidade = rugosity;
 			//console.log(object);
 			
 			camera.calculaVetorN();
 
 			camera.calculaVetorV();
 			camera.calculaVetorU();	
+			
 
 			console.log(camera);
 
 			light.toViewCoord(camera);
-			///console.log(light);
+			console.log(light);
 
 			object.views(camera);
 			//console.log(object);
@@ -34,7 +37,9 @@ function init(){  //por enquanto só funciona no edge
 
 			var rd = new Renderiza(camera,object,light);
 			rd.inicializaZBuffer();
-			console.log(rd);	
+			console.log(rd);
+
+
 			
 
 			
@@ -145,7 +150,7 @@ function loadIluminacao(fileContent){
 
 			if(lineAtr[i]) {
 				if (lineValues.length == 1) {
-					light[lineAtr[i]] = parseInt(lineValues[0]);
+					light[lineAtr[i]] = parseFloat(lineValues[0]);
 				} else {
 					light[lineAtr[i]] = new Vetor(
 						parseFloat(lineValues[0]),

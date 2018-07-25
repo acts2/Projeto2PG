@@ -1,3 +1,13 @@
+/*
+Geram-se números
+aleatórios para se multiplicar pelos vetores das arestas do triângulo para serem somados à
+normal (a perturbação é paralela ao plano do triângulo, por isso se utilizam os vetores das
+arestas). Deixar um fator multiplicador arbitrado pelo usuário para controlar o grau de
+rugosidade. Calculam-se também os demais vetores (L, V e R) e os substitui na equação do
+modelo de iluminação de Phong produzindo a cor do pixel atual.
+*/
+
+
 class Renderiza{
 
     constructor(camera,objeto,light){
@@ -38,15 +48,26 @@ class Renderiza{
 	}
 	
 
-	render(){
-		//this.inicializaZBuffer();
-		//console.log("aqui");
+	render(){		
 
 		for (let i = 0; i<this.objeto.qtdTri;i++) {
-			//console.log(i,this.objeto.qtdTri);
-
+			
 			var cadaTriangulo = this.objeto.getTriangulo(i);
-			//console.log("estou aqui");
+
+			var v2v1 = subtrai(cadaTriangulo.vista[0],cadaTriangulo.vista[1]);
+			var v3v2 = subtrai(cadaTriangulo.vista[1],cadaTriangulo.vista[2]);
+			var v3v1 = subtrai(cadaTriangulo.vista[0],cadaTriangulo.vista[2]);
+
+			var pe = [v2v1,v3v1,v3v2];
+
+			var rand = getRandom();
+
+			var pert = [pe[0].multPorEsc(rand),pe[1].multPorEsc(rand),pe[2].multPorEsc(rand)];
+
+			
+			//console.log(cadaTriangulo,v2v1);
+			
+			
 
 			cadaTriangulo.sortVertices();
 			//console.log(cadaTriangulo);
@@ -58,7 +79,6 @@ class Renderiza{
 				continue;
 			}
 			
-
 			cadaTriangulo.calculaLimites();
 			
 			
@@ -72,12 +92,7 @@ class Renderiza{
 					var coordenadas = cadaTriangulo.calculaCoordBaricentricas(pixel);
 					//console.log("testando coordenadas",cadaTriangulo,coordenadas);
 
-					var pLinha = cadaTriangulo.calculaPLinha(coordenadas);
-					//console.log(cadaTriangulo.limites[1][0],cadaTriangulo.limites[1][1]);
-
-					//console.log("testando zbuffer",this.zBuffer.length);
-
-					
+					var pLinha = cadaTriangulo.calculaPLinha(coordenadas);					
 
 					if (x >= 0 && y >= 0 && x < this.zBuffer.length && y < this.zBuffer[0].length
 							 && pLinha.z > 0 && pLinha.z < this.zBuffer[Math.round(x)][Math.round(y)]) {
@@ -87,17 +102,31 @@ class Renderiza{
 						this.zBuffer[Math.round(x)][Math.round(y)] = pLinha.z;
 						//console.log(pLinha);
 
-						var pontoNormal = cadaTriangulo.getNormalAprx(coordenadas);	
-						//console.log("testando normal",pontoNormal);				
+						var pontoNormal = cadaTriangulo.getNormalAprx(coordenadas,pert);	
+						//console.log("testando normal",pontoNormal);
+
+						//var pontoNormal = adiciona(pontoNormal,pert[0]);
+						//var pontoNormal = adiciona(pontoNormal,pert[1]);
+						//var pontoNormal = adiciona(pontoNormal,pert[2]);
+
+
+						/*if (coordenadas[0]<0.1 || coordenadas[1]<0.1 || coordenadas[2] < 0.1) {
+							this.iluminacao.vetDif = new Vetor(10/256,200/256,10/256);
+						} else
+							if ((coordenadas[0]<0.6 && coordenadas[0]>0.3) || (coordenadas[1]<0.6 && coordenadas[1]>0.3) ||
+						(coordenadas[2]<0.6 && coordenadas[2]>0.3)) {
+							this.iluminacao.vetDif = new Vetor(10/256,10/256,200/256);
+						} else {
+							this.iluminacao.vetDif = new Vetor(200/256,10/256,10/256);
+						}*/
+
+
 
 						
 						var cor = this.calculaCor(pLinha, pontoNormal);
 						//console.log("sera que eu cheguei aqui");					
 						
-						colorePonto(x,y,cor,this.contexto);
-
-
-						
+						colorePonto(x,y,cor,this.contexto);						
 							
 					}
 				}
@@ -134,6 +163,8 @@ class Renderiza{
 		*/
 		
 		//componente ambiental = ka*ia
+
+		//this.iluminacao.rugosidade = 5;
 		var ambiental = componenteAmbiental(this.iluminacao);
 
 		var cor = ambiental;
@@ -195,7 +226,10 @@ class Renderiza{
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
 		ctx.width = this.Width;
-		ctx.height = this.Height;	
+		ctx.height = this.Height;
+		ctx.fillStyle = 'white';	
+		ctx.fillRect(0,0,ctx.width,ctx.height);
+
 		
 		return ctx;
 	
@@ -232,7 +266,7 @@ function componenteDifuso(dotNL,iluminacao){
 function componenteEspecular(dotRV,iluminacao){
 	
 	
-    var espec = Math.pow((dotRV * iluminacao.especular),iluminacao.rugosidade);
+    var espec = iluminacao.especular * (Math.pow(dotRV ,iluminacao.rugosidade));
     
 
 	var especular = iluminacao.Il.multPorEsc(espec);
@@ -270,5 +304,17 @@ function colorePonto(i,j,cor,ctx){
 	
 	
 }
+
+function getRandom(){
+	return Math.floor((Math.random()*50)+1);
+}
+
+/*var rand = [getRandom(),getRandom(),getRandom()];
+var newV = new Vetor(1,2,3);
+var nda= new Vetor(3,4,5);
+var k = new Vetor(2,3,4);
+
+var pert = [(newV.multPorEsc(rand[0])),(nda.multPorEsc(rand[1])),(k.multPorEsc(rand[2]))];
+console.log(rand,pert);*/
 
 

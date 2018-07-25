@@ -73,13 +73,13 @@ class Triangulo{
 
 	}
 
-	getNormalAprx(coords){
+	getNormalAprx(coords,pert){
 
 		
 
-		var n1 = this.normais[0];
-		var n2 = this.normais[1];
-		var n3 = this.normais[2];
+		var n1 = adiciona(this.normais[0],pert[0]);
+		var n2 = adiciona(this.normais[1],pert[1]);
+		var n3 = adiciona(this.normais[2],pert[2]);
 
 	
 

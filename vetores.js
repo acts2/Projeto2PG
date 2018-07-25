@@ -48,11 +48,11 @@ function produtoVetorial(vetA,vetB){
 	
 }
 
-function projVetores(vetorU,vetorV){ //projeção do vetor u na direção de v
+function projVetores(vetorV,vetorN){ //projeção do vetor u na direção de v
 
-	let esc = (produtoEscalar(vetorU,vetorV)/produtoEscalar(vetorU,vetorU));	
+	let esc = (produtoEscalar(vetorV,vetorN)/produtoEscalar(vetorN,vetorN));	
 
-	return  vetorV.multPorEsc(esc);	
+	return  vetorN.multPorEsc(esc);	
 
 }
 

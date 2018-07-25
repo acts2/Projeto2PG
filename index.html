@@ -39,6 +39,14 @@
 				</select>
 
 			</div>
+			<div>
+				<p></p>
+			</div>
+			<div>
+				<h3>Escolha o fator de rugosidade</h3>
+				<input type="text" id="rugosidade" value="">
+				<p></p>
+			</div>
 			<div class="form-item">
 				<span class="readButton">
 					<button type="button">
@@ -71,8 +79,10 @@
 
 		document.querySelector('.readButton').addEventListener('click', function(e) {
 
-				if (e.target.tagName.toLowerCase() == 'button') {					
-					init();
+				if (e.target.tagName.toLowerCase() == 'button') {
+					var x = document.getElementById("rugosidade").value;
+					var rug = parseInt(x);				
+					init(rug);
 					
 					//render();
 				}
