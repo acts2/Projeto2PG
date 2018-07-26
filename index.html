@@ -2,6 +2,7 @@
 <html lang="pt">
 <head>
 	<meta charset = "UTF-8">
+	<title>Projeto PG</title>
 
 	<script src = "vetores.js"></script>
 	<script src = "triangulo.js"></script>
@@ -18,9 +19,10 @@
 
 
 	<div id='contents' class="container">
-		<h1>
-			
-		</h1>
+		<h2>
+			Tema 2: Rugosidade através de 
+			perturbacoes normais
+		</h2>
 
 		<form class="pane fs-form" name="fs-form" action="">
 			<h3>Escolha um objeto</h3>
@@ -28,13 +30,14 @@
 			<div class="form-item">
 				
 				<select name="object" id="object-file">
-					<option value="crusader" selected>Crusader</option>
+					
 					<option value="vaso">Vaso</option>
-					<option value="calice2">Calice</option>
-					<option value="camaro">Camaro</option>
-					<option value="cat">Cat</option>
+					<option value="calice2">Calice</option>					
+					<option value="crusader">Crusader</option>
+					<option value="cat">Gato</option>
 					<option value="spaceship">Spaceship</option>
-					<option value="cow">Cow</option>
+					<option value="vader">Darth Vader</option>
+					<option value="cow">Vaca</option>
 					<option value="yoda">Yoda</option>
 				</select>
 
@@ -43,7 +46,7 @@
 				<p></p>
 			</div>
 			<div>
-				<h3>Escolha o fator de rugosidade</h3>
+				<h3>Escolha o grau de rugosidade</h3>
 				<input type="text" id="rugosidade" value="">
 				<p></p>
 			</div>
@@ -54,11 +57,7 @@
 					</button>
 				</span>
 			</div>
-			<div class="form-item">
-				<span class="camera-error error"></span>
-				<span class="light-error error"></span>
-				<span class="object-error error"></span>
-			</div>
+			
 		</form>
 		<div>
 			<p></p>
@@ -66,10 +65,26 @@
 
 		<div class="pane fs-canvas">		
 
-			<canvas id="canvas" width="665" height="480"></canvas>
+			<canvas id="canvas" width="670" height="500"></canvas>
 		</div>
 
 	</div>
+	<style>
+		.fs-canvas {
+			width: 70%;		
+			margin: 10px 0;
+			border: 3px solid gray;
+		}
+		.container{
+			position: relative;
+			width: 960px;
+			height: 100%;
+			overflow: hidden;
+			margin: 0 auto;
+		}
+		
+
+	</style>
 
 	<script >
 

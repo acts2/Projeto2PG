@@ -68,31 +68,3 @@ class Camera{
 }
 
 
-/*var pos = new Vetor(-200,-50,300);
-var N = new Vetor(0.667,0.172,-1);
-var V = new Vetor(0,3,0);
-
-var cam = {};
-cam['pos'] = pos;
-cam['N'] = N;
-cam['V'] = V;
-cam['dist'] = 65;
-cam['hx'] = 0.5;
-cam['hy'] = 0.6;
-
-var ca = new Camera(cam);
-//console.log(ca.posicao);
-//console.log(produtoVetorial(v,n));
-//console.log(ca.calculaVetorU());
-console.log(ca.calculaVetorN());
-console.log(ca.calculaVetorV());
-console.log(ca.calculaVetorU());
-//console.log(ca.getMatriz());*/
-
-
-
-
-
-
-
-

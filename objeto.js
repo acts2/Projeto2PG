@@ -117,22 +117,16 @@ class Objeto{
 			//console.log(v1v2); ok
 			var v1v3 = subtrai(v1,v3); // não tenho certeza se é v2v3 ou v1v3
 			//console.log(v2v3); ok
-			this.triNormais[i] = produtoVetorial(v1v2,v1v3); //calcula a normal
+			this.triNormais[i] = produtoVetorial(v1v3,v1v2); //calcula a normal
 			this.triNormais[i] = this.triNormais[i].normaliza();//depois normaliza
-			//console.log(this.triNormais[i]);
-			//console.log(this.verticesNormais[vix]);
-
-			//somar ela a normal de cada um dos 3 pontos 
-			var aux = this.verticesNormais[vix-1];
+			
+			//somar ela a normal de cada um dos 3 pontos 			
 			
 			
-			this.verticesNormais[vix-1] = adiciona(aux,this.triNormais[i]).normaliza();//normal do vertice que esta em vix
-			//this.verticesNormais[vix-1].normaliza();
-			var aux1 = this.verticesNormais[viy-1];
-			this.verticesNormais[viy-1] = adiciona(aux1,this.triNormais[i]).normaliza();
+			this.verticesNormais[vix-1] = adiciona(this.verticesNormais[vix-1],this.triNormais[i]);//normal do vertice que esta em vix
+			this.verticesNormais[viy-1] = adiciona(this.verticesNormais[viy-1],this.triNormais[i]);			
 			
-			var au = this.verticesNormais[viz-1];
-			this.verticesNormais[viz-1] = adiciona(au,this.triNormais[i]).normaliza();
+			this.verticesNormais[viz-1] = adiciona(this.verticesNormais[viz-1],this.triNormais[i]);
 
 
 			
@@ -140,14 +134,16 @@ class Objeto{
 
 		for(var x=0;x<this.qtdP;x++){
 				this.verticesNormais[x].normaliza();
-			}		
+			}	
+			
 
+		
 	}
 
-	/*normalVertices(){
-		/*
-		A normal de um vértice é calculada somando todas normais dos triângulos que tem esse vértice e
-		dividindo pela quantidade de triângulos aos quais o vértice pertence
+	normalVertices(){
+		
+		//A normal de um vértice é calculada somando todas normais dos triângulos que tem esse vértice e
+		//dividindo pela quantidade de triângulos aos quais o vértice pertence
 		
 
 		for(var j=0;j<this.qtdP;j++){
@@ -177,43 +173,8 @@ class Objeto{
 		}
 
 
-	}*/
+	}
 
 	
 }
-
-/*var p1 = new Vetor(1,2,-2);
-var p2 = new Vetor(3,-1,2);
-var p3 = new Vetor(-1,3,4);
-var p4 = new Vetor(2,2,1);
-
-var verti = [p1,p2,p3,p4];
-
-var t1 = new Vetor(1,2,3);
-var t2 = new Vetor(2,1,4);
-
-var tri = [t1,t2];
-var qt = [4,2];
-
-var obj = {};
-obj['qtd'] = qt;
-obj['vertices'] = verti;
-obj['triangles'] = tri;
-
-var ob = new Objeto(obj);
-//console.log(ob.vert)
-//console.log(ob.triangulos);
-ob.views(ca);
-ob.coord2d(ca);
-ob.normalTriangulos();
-//console.log(ob.getTriangulo(0));
-
-//var t = new Triangulo(tr[0],tr[1],tr[2]);*/
-
-//console.log(t);
-//console.log(tr);
-//console.log(ob.verticesNormais);
-//ob.normalTriangulos();
-//ob.normalVertices();
-//console.log(ob);*/
 

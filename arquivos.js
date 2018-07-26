@@ -13,6 +13,7 @@ function init(rugosity){  //por enquanto só funciona no edge
 			//console.log(camera);
 			var light = loadIluminacao(lightFileContent);
 			var object = loadObjeto(objectFileContent);	
+			
 
 			light.rugosidade = rugosity;
 			//console.log(object);
@@ -33,6 +34,7 @@ function init(rugosity){  //por enquanto só funciona no edge
 			object.coord2d(camera);
 			
 			object.normalTriangulos();
+			//object.normalVertices();
 			console.log(object);
 
 			var rd = new Renderiza(camera,object,light);
@@ -43,7 +45,8 @@ function init(rugosity){  //por enquanto só funciona no edge
 			
 
 			
-			rd.render();	
+			rd.render();
+			//rd.colore();	
 
 
 
@@ -66,7 +69,7 @@ function loadFiles(){
 		requestFile(objectFileName)])
 };
 
-var requestFile = function(filename,alias,attributes,callback) {
+var requestFile = function(filename) {
 
 	var request = new XMLHttpRequest();			
 	console.info('Requesting ' + filename);
@@ -220,7 +223,7 @@ function loadObjeto(fileContent){
 				}
 			}
 
-			console.log(object.vertices[0]);			
+				
 			
 			if (object.vertices.length !== verticesQtd) {
 				return;
@@ -262,7 +265,6 @@ function loadObjeto(fileContent){
 			}
 		}
 
-		console.log(object.triangles[0]);
 
 		var obj = new Objeto(object);
 		//console.log(obj.triangulos[4].x);
@@ -270,7 +272,7 @@ function loadObjeto(fileContent){
 
 }
 
-//init();
+
 
 
 

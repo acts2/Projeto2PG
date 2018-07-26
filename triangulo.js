@@ -14,13 +14,12 @@ class Triangulo{
 		var v1 = this.p2d[0];
 	    var v2 = this.p2d[1];
 		var v3 = this.p2d[2];
-		//console.log(v1,v2,v3);
 
 		var A1 = v1.x, A2 = v1.y;
 		var B1 = v2.x, B2 = v2.y;
 		var C1 = v3.x, C2 = v3.y;
 
-		var x = ponto.x, y = ponto.y;
+		/*var x = ponto.x, y = ponto.y;
 
 	
 		var a = (B2 - C2)*(x - C1) - (C1 - B1)*(C2 - y);
@@ -29,23 +28,20 @@ class Triangulo{
 		var c = (A2 - B2)*(x - B1) - (B1 - A1)*(B2 - y);
 
 		var aux = (A1 - C1)*(B2 - C2) - (A2 - C2)*(B1 - C1);
-		//console.log(aux);	
+		//console.log(aux);	*/
 
 	
 
-		/*var P1 = ponto.x, P2 = ponto.y;
-		//console.log(P1,P2);
+		var P1 = ponto.x, P2 = ponto.y;		
 
 		var a = (B2 - C2)*P1 + (C1 - B1)*P2 + (B1*C2 - B2*C1);
-		//console.log(""+B2 + "-"+C2+"*"+P1);
-		var b = (C2 - A2)*P1 + (A1 - C1)*P2 + (C1*A2 - C2*A1);
-		//console.log(b);
-		var c = (A2-B2)*P1 + (B1-A1)*P2 + (A1*B2 - A2*B1);
-		//console.log(c);
-
 		
+		var b = (C2 - A2)*P1 + (A1 - C1)*P2 + (C1*A2 - C2*A1);
+		
+		var c = (A2-B2)*P1 + (B1-A1)*P2 + (A1*B2 - A2*B1);
+				
 		var aux = A1*(B2-C2) + B1*(C2-A2) + C1*(A2-B2);	
-		*/
+		
 
 		coords[0] = a/aux;
 		coords[1] = b/aux;
@@ -73,13 +69,13 @@ class Triangulo{
 
 	}
 
-	getNormalAprx(coords,pert){
+	getNormalAprx(coords){
 
 		
 
-		var n1 = adiciona(this.normais[0],pert[0]);
-		var n2 = adiciona(this.normais[1],pert[1]);
-		var n3 = adiciona(this.normais[2],pert[2]);
+		var n1 = this.normais[0];
+		var n2 = this.normais[1];
+		var n3 = this.normais[2];
 
 	
 
@@ -235,32 +231,4 @@ class Triangulo{
 }
 
 
-
-/*var p2d1 = new Vetor(1,2,0);
-var p2d2 = new Vetor(-1,2,0);
-var p2d3 = new Vetor(3,1,0);
-
-var view1 = new Vetor(2,1,2);
-var view2 = new Vetor(1,1,2);
-var view3 = new Vetor(2,-1,-3);
-
-var n1 = new Vetor(3,4,1);
-var n2 = new Vetor(0,2,1);
-var n3 = new Vetor(-1,1,0);
-
-var p2 = [p2d1,p2d2,p2d3];
-var view = [view1,view2,view3];
-var normal = [n1,n2,n3];
-
-var trian = new Triangulo(view,p2,normal);
-
-console.log();
-var co = trian.calculaCoordBaricentricas(new Vetor(0,0,0));
-var teste = co[0]+co[1]+co[2];
-console.log(teste);*/
-//console.log(tri.calculaLimites());
-//tri.atualizaLimites();
-//console.log(tri.limites);*/
-//var t = new Triangulo(tr[0],tr[1],tr[2]);
-//console.log(t);
 

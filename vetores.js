@@ -98,33 +98,3 @@ function multMatriz3x1(mat1,mat2){ //multiplicacao de matriz 3x3 e 3x1
 }
 
 
-
-/* testes
-var vetA = new Vetor(1,-2,2);
-var vetB = new Vetor(-3,6,2);
-var vetC = new Vetor (1,1,1);
-
-vetA = adiciona(vetA,vetB);
-console.log(vetA);
-//var vet = produtoVetorial(vetA,vetB);
-//var norm = norma(vetA);
-//var proj = projVetores(vetA,vetB);
-//vetA = adiciona(vetA,vetB);
-//console.log(vetA);
-//console.log(adiciona(vetA,vetB));
-//console.log(vet);
-//console.log(vetA.norma());
-//console.log(vetA.normaliza());
-
-/*var vetD = new Vetor(1,2,2);
-var m2 = [vetD];
-var m1 = [vetA,vetB,vetC];
-
-console.log(multMatriz3x1(m1,vetD));
-*/
-
-
-
-
-
-
